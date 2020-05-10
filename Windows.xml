@@ -1,200 +1,146 @@
-<domain type="kvm" id="1">
+<domain type='kvm'>
   <name>Windows-Virtual</name>
   <uuid>c08b78dd-2004-4294-be34-4df543ee3b7d</uuid>
-  <memory unit="KiB">2634752</memory>
-  <currentMemory unit="KiB">2633880</currentMemory>
-  <vcpu placement="static">2</vcpu>
+  <memory unit='KiB'>2633877</memory>
+  <currentMemory unit='KiB'>2633877</currentMemory>
+  <vcpu placement='static'>2</vcpu>
   <os>
-    <type arch="x86_64" machine="pc-q35-2.11">hvm</type>
-    <boot dev="hd"/>
+    <type arch='x86_64' machine='pc-q35-2.11'>hvm</type>
+    <boot dev='hd'/>
   </os>
   <features>
     <acpi/>
     <apic/>
     <pae/>
     <hyperv>
-      <relaxed state="on"/>
-      <vapic state="on"/>
-      <spinlocks state="on" retries="8191"/>
+      <relaxed state='on'/>
+      <vapic state='on'/>
+      <spinlocks state='on' retries='8191'/>
     </hyperv>
   </features>
-  <cpu mode="custom" match="exact" check="full">
-    <model fallback="forbid">Skylake-Client-IBRS</model>
-    <vendor>Intel</vendor>
-    <feature policy="require" name="ss"/>
-    <feature policy="require" name="vmx"/>
-    <feature policy="require" name="hypervisor"/>
-    <feature policy="require" name="tsc_adjust"/>
-    <feature policy="require" name="clflushopt"/>
-    <feature policy="require" name="umip"/>
-    <feature policy="require" name="md-clear"/>
-    <feature policy="require" name="stibp"/>
-    <feature policy="require" name="arch-capabilities"/>
-    <feature policy="require" name="ssbd"/>
-    <feature policy="require" name="xsaves"/>
-    <feature policy="require" name="pdpe1gb"/>
-    <feature policy="require" name="ibpb"/>
-    <feature policy="require" name="amd-ssbd"/>
-    <feature policy="require" name="skip-l1dfl-vmentry"/>
-  </cpu>
-  <clock offset="localtime">
-    <timer name="hypervclock" present="yes"/>
-    <timer name="hpet" present="no"/>
+  <cpu mode='host-model' check='partial'/>
+  <clock offset='localtime'>
+    <timer name='hypervclock' present='yes'/>
+    <timer name='hpet' present='no'/>
   </clock>
   <on_poweroff>destroy</on_poweroff>
   <on_reboot>restart</on_reboot>
   <on_crash>destroy</on_crash>
   <devices>
     <emulator>/usr/bin/qemu-kvm</emulator>
-    <disk type="file" device="disk">
-      <driver name="qemu" type="qcow2" cache="none" io="native"/>
-      <source file="/home/public/VMs/Windows-Virtual/Windows-Virtual.img" index="2"/>
-      <backingStore/>
-      <target dev="vda" bus="virtio"/>
-      <alias name="virtio-disk0"/>
-      <address type="pci" domain="0x0000" bus="0x06" slot="0x00" function="0x0"/>
+    <disk type='file' device='disk'>
+      <driver name='qemu' type='qcow2' cache='none' io='native'/>
+      <source file='/home/public/VMs/Windows-Virtual/Windows-Virtual.img'/>
+      <target dev='vda' bus='virtio'/>
+      <address type='pci' domain='0x0000' bus='0x06' slot='0x00' function='0x0'/>
     </disk>
-    <disk type="file" device="cdrom">
-      <driver name="qemu"/>
-      <target dev="sdc" bus="sata"/>
+    <disk type='file' device='cdrom'>
+      <driver name='qemu' type='raw'/>
+      <target dev='sdc' bus='sata'/>
       <readonly/>
-      <alias name="sata0-0-0"/>
-      <address type="drive" controller="0" bus="0" target="0" unit="0"/>
+      <address type='drive' controller='0' bus='0' target='0' unit='0'/>
     </disk>
-    <controller type="usb" index="0" model="ich9-ehci1">
-      <alias name="usb"/>
-      <address type="pci" domain="0x0000" bus="0x00" slot="0x1d" function="0x7"/>
+    <controller type='usb' index='0' model='ich9-ehci1'>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x1d' function='0x7'/>
     </controller>
-    <controller type="usb" index="0" model="ich9-uhci1">
-      <alias name="usb"/>
-      <master startport="0"/>
-      <address type="pci" domain="0x0000" bus="0x00" slot="0x1d" function="0x0" multifunction="on"/>
+    <controller type='usb' index='0' model='ich9-uhci1'>
+      <master startport='0'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x1d' function='0x0' multifunction='on'/>
     </controller>
-    <controller type="usb" index="0" model="ich9-uhci2">
-      <alias name="usb"/>
-      <master startport="2"/>
-      <address type="pci" domain="0x0000" bus="0x00" slot="0x1d" function="0x1"/>
+    <controller type='usb' index='0' model='ich9-uhci2'>
+      <master startport='2'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x1d' function='0x1'/>
     </controller>
-    <controller type="usb" index="0" model="ich9-uhci3">
-      <alias name="usb"/>
-      <master startport="4"/>
-      <address type="pci" domain="0x0000" bus="0x00" slot="0x1d" function="0x2"/>
+    <controller type='usb' index='0' model='ich9-uhci3'>
+      <master startport='4'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x1d' function='0x2'/>
     </controller>
-    <controller type="sata" index="0">
-      <alias name="ide"/>
-      <address type="pci" domain="0x0000" bus="0x00" slot="0x1f" function="0x2"/>
+    <controller type='sata' index='0'>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x1f' function='0x2'/>
     </controller>
-    <controller type="pci" index="0" model="pcie-root">
-      <alias name="pcie.0"/>
+    <controller type='pci' index='0' model='pcie-root'/>
+    <controller type='pci' index='1' model='dmi-to-pci-bridge'>
+      <model name='i82801b11-bridge'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x1e' function='0x0'/>
     </controller>
-    <controller type="pci" index="1" model="dmi-to-pci-bridge">
-      <model name="i82801b11-bridge"/>
-      <alias name="pci.1"/>
-      <address type="pci" domain="0x0000" bus="0x00" slot="0x1e" function="0x0"/>
+    <controller type='pci' index='2' model='pci-bridge'>
+      <model name='pci-bridge'/>
+      <target chassisNr='2'/>
+      <address type='pci' domain='0x0000' bus='0x01' slot='0x00' function='0x0'/>
     </controller>
-    <controller type="pci" index="2" model="pci-bridge">
-      <model name="pci-bridge"/>
-      <target chassisNr="2"/>
-      <alias name="pci.2"/>
-      <address type="pci" domain="0x0000" bus="0x01" slot="0x00" function="0x0"/>
+    <controller type='pci' index='3' model='pcie-root-port'>
+      <model name='pcie-root-port'/>
+      <target chassis='3' port='0x8'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x01' function='0x0' multifunction='on'/>
     </controller>
-    <controller type="pci" index="3" model="pcie-root-port">
-      <model name="pcie-root-port"/>
-      <target chassis="3" port="0x8"/>
-      <alias name="pci.3"/>
-      <address type="pci" domain="0x0000" bus="0x00" slot="0x01" function="0x0" multifunction="on"/>
+    <controller type='pci' index='4' model='pcie-root-port'>
+      <model name='pcie-root-port'/>
+      <target chassis='4' port='0x9'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x01' function='0x1'/>
     </controller>
-    <controller type="pci" index="4" model="pcie-root-port">
-      <model name="pcie-root-port"/>
-      <target chassis="4" port="0x9"/>
-      <alias name="pci.4"/>
-      <address type="pci" domain="0x0000" bus="0x00" slot="0x01" function="0x1"/>
+    <controller type='pci' index='5' model='pcie-root-port'>
+      <model name='pcie-root-port'/>
+      <target chassis='5' port='0xa'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x01' function='0x2'/>
     </controller>
-    <controller type="pci" index="5" model="pcie-root-port">
-      <model name="pcie-root-port"/>
-      <target chassis="5" port="0xa"/>
-      <alias name="pci.5"/>
-      <address type="pci" domain="0x0000" bus="0x00" slot="0x01" function="0x2"/>
+    <controller type='pci' index='6' model='pcie-root-port'>
+      <model name='pcie-root-port'/>
+      <target chassis='6' port='0xb'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x01' function='0x3'/>
     </controller>
-    <controller type="pci" index="6" model="pcie-root-port">
-      <model name="pcie-root-port"/>
-      <target chassis="6" port="0xb"/>
-      <alias name="pci.6"/>
-      <address type="pci" domain="0x0000" bus="0x00" slot="0x01" function="0x3"/>
+    <controller type='virtio-serial' index='0'>
+      <address type='pci' domain='0x0000' bus='0x03' slot='0x00' function='0x0'/>
     </controller>
-    <controller type="virtio-serial" index="0">
-      <alias name="virtio-serial0"/>
-      <address type="pci" domain="0x0000" bus="0x03" slot="0x00" function="0x0"/>
-    </controller>
-    <interface type="bridge">
-      <mac address="52:54:00:31:62:be"/>
-      <source bridge="virbr0"/>
-      <target dev="tap0"/>
-      <model type="virtio"/>
-      <alias name="net0"/>
-      <address type="pci" domain="0x0000" bus="0x04" slot="0x00" function="0x0"/>
+    <interface type='bridge'>
+      <mac address='52:54:00:31:62:be'/>
+      <source bridge='virbr0'/>
+      <target dev='tap0'/>
+      <model type='virtio'/>
+      <address type='pci' domain='0x0000' bus='0x04' slot='0x00' function='0x0'/>
     </interface>
-    <channel type="spicevmc">
-      <target type="virtio" name="com.redhat.spice.0" state="connected"/>
-      <alias name="channel0"/>
-      <address type="virtio-serial" controller="0" bus="0" port="1"/>
+    <channel type='spicevmc'>
+      <target type='virtio' name='com.redhat.spice.0'/>
+      <address type='virtio-serial' controller='0' bus='0' port='1'/>
     </channel>
-    <channel type="spiceport">
-      <source channel="org.spice-space.webdav.0"/>
-      <target type="virtio" name="org.spice-space.webdav.0" state="connected"/>
-      <alias name="channel1"/>
-      <address type="virtio-serial" controller="0" bus="0" port="2"/>
+    <channel type='spiceport'>
+      <source channel='org.spice-space.webdav.0'/>
+      <target type='virtio' name='org.spice-space.webdav.0'/>
+      <address type='virtio-serial' controller='0' bus='0' port='2'/>
     </channel>
-    <input type="mouse" bus="usb">
-      <alias name="input0"/>
-      <address type="usb" bus="0" port="1"/>
+    <input type='mouse' bus='usb'>
+      <address type='usb' bus='0' port='1'/>
     </input>
-    <input type="keyboard" bus="usb">
-      <alias name="input1"/>
-      <address type="usb" bus="0" port="2"/>
+    <input type='keyboard' bus='usb'>
+      <address type='usb' bus='0' port='2'/>
     </input>
-    <input type="mouse" bus="ps2">
-      <alias name="input2"/>
-    </input>
-    <input type="keyboard" bus="ps2">
-      <alias name="input3"/>
-    </input>
-    <graphics type="spice">
-      <listen type="none"/>
-      <image compression="off"/>
+    <input type='mouse' bus='ps2'/>
+    <input type='keyboard' bus='ps2'/>
+    <graphics type='spice'>
+      <listen type='none'/>
+      <image compression='off'/>
     </graphics>
-    <sound model="ich6">
-      <alias name="sound0"/>
-      <address type="pci" domain="0x0000" bus="0x02" slot="0x01" function="0x0"/>
+    <sound model='ich6'>
+      <address type='pci' domain='0x0000' bus='0x02' slot='0x01' function='0x0'/>
     </sound>
     <video>
-      <model type="qxl" ram="65536" vram="65536" vgamem="16384" heads="1" primary="yes"/>
-      <alias name="video0"/>
-      <address type="pci" domain="0x0000" bus="0x00" slot="0x02" function="0x0"/>
+      <model type='qxl' ram='65536' vram='65536' vgamem='16384' heads='1' primary='yes'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x02' function='0x0'/>
     </video>
-    <redirdev bus="usb" type="spicevmc">
-      <alias name="redir0"/>
-      <address type="usb" bus="0" port="3"/>
+    <redirdev bus='usb' type='spicevmc'>
+      <address type='usb' bus='0' port='3'/>
     </redirdev>
-    <redirdev bus="usb" type="spicevmc">
-      <alias name="redir1"/>
-      <address type="usb" bus="0" port="4"/>
+    <redirdev bus='usb' type='spicevmc'>
+      <address type='usb' bus='0' port='4'/>
     </redirdev>
-    <redirdev bus="usb" type="spicevmc">
-      <alias name="redir2"/>
-      <address type="usb" bus="0" port="5"/>
+    <redirdev bus='usb' type='spicevmc'>
+      <address type='usb' bus='0' port='5'/>
     </redirdev>
-    <redirdev bus="usb" type="spicevmc">
-      <alias name="redir3"/>
-      <address type="usb" bus="0" port="6"/>
+    <redirdev bus='usb' type='spicevmc'>
+      <address type='usb' bus='0' port='6'/>
     </redirdev>
-    <memballoon model="virtio">
-      <alias name="balloon0"/>
-      <address type="pci" domain="0x0000" bus="0x05" slot="0x00" function="0x0"/>
+    <memballoon model='virtio'>
+      <address type='pci' domain='0x0000' bus='0x05' slot='0x00' function='0x0'/>
     </memballoon>
   </devices>
-  <seclabel type="dynamic" model="selinux" relabel="yes">
-    <label>unconfined_u:unconfined_r:svirt_t:s0:c438,c867</label>
-    <imagelabel>unconfined_u:object_r:svirt_image_t:s0:c438,c867</imagelabel>
-  </seclabel>
+  <seclabel type='dynamic' model='selinux' relabel='yes'/>
 </domain>
